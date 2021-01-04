@@ -11,13 +11,13 @@
 
 ##### Configuração de Ambiente:
 
-Caso precise de ajuda em configurar o ambiente para executar o projeto Flutter <a href = "https://medium.com/@rdias.ga?source=post_page-----7d19cfdae1b8--------------------------------"><img src="https://img.shields.io/badge/CLICK AQUI-%23{#00AFAA}.svg?&style=for-the-badge&logo={ICON}&logoColor=white"></a>, que tera acesso a um artigo feito por <i>Rafael Dias</i> , publicado no site https://medium.com/ dia 25 de Março de 2019.
+Caso precise de ajuda em configurar o ambiente para executar o projeto Flutter <a href = "https://medium.com/@rdias.ga?source=post_page-----7d19cfdae1b8--------------------------------" target="_blank"><img src="https://img.shields.io/badge/CLICK AQUI-%23{#00AFAA}.svg?&style=for-the-badge&logo={ICON}&logoColor=white"></a>, que terá acesso a um artigo feito por <i>Rafael Dias</i> , publicado no site <a href="https://medium.com/ " target="_blank">medium.com</a> dia 25 de Março de 2019.
 
 
 
 ##### Descrição do Projeto:
 
-Neste projeto foi criado um aplicativo mobile híbrido que efetua o cadastro de um usuario com os seguintes critérios para validação da senha:
+Neste projeto foi criado um aplicativo mobile híbrido que efetua o cadastro de um usuário com os seguintes critérios para validação da senha:
 - Nove ou mais caracteres
 - Ao menos 1 dígito
 - Ao menos 1 letra minúscula
