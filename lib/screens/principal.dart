@@ -1,5 +1,3 @@
-import 'package:desafioItau/database/dao/usuario_dao.dart';
-import 'package:desafioItau/models/usuario.dart';
 import 'package:flutter/material.dart';
 
 class Principal extends StatelessWidget {
@@ -13,11 +11,13 @@ class Principal extends StatelessWidget {
     this.nomeUsuario,
   });
 
+  static const _titleAppBar = "Bem Vindo(a) !";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bem Vindo(a) !"),
+        title: Text(_titleAppBar),
       ),
       body: Container(
         padding: EdgeInsets.only(
@@ -43,7 +43,7 @@ class Principal extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(left: 16.0),
+              padding: const EdgeInsets.only(left: 10.0),
               child: Text(
                 "Olá $nomeUsuario, essa foi a minha solução para o desafio. \n\nEspero que tenha gostado !",
                 style: TextStyle(

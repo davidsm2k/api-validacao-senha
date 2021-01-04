@@ -1,5 +1,3 @@
-import 'package:desafioItau/database/dao/usuario_dao.dart';
-import 'package:desafioItau/models/usuario.dart';
 import 'package:desafioItau/screens/login.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +7,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.orange[900],
+        accentColor: Colors.orangeAccent[700],
       ),
       home: Login(),
     );

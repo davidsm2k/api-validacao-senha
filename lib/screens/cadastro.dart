@@ -12,14 +12,17 @@ class _CadastroState extends State<Cadastro> {
   final TextEditingController _controllerNome = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerSenha = TextEditingController();
-  final _CadastroKey = GlobalKey<FormState>();
+  final _cadastroKey = GlobalKey<FormState>();
   final UsuarioDAO _dao = UsuarioDAO();
+
+  static const _titleAppBar = "CADASTRO";
+  static const _nameButtonCadastrar = "Cadastrar";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("CADASTRO"),
+        title: Text(_titleAppBar),
       ),
       body: Container(
         padding: EdgeInsets.only(
@@ -28,7 +31,7 @@ class _CadastroState extends State<Cadastro> {
           right: 20,
         ),
         child: Form(
-          key: _CadastroKey,
+          key: _cadastroKey,
           autovalidateMode: AutovalidateMode.always,
           child: ListView(
             children: [
@@ -50,7 +53,6 @@ class _CadastroState extends State<Cadastro> {
                 rotulo: "Senha",
                 dica: "Digite uma senha",
               ),
-
               SizedBox(
                 height: 40,
               ),
@@ -77,7 +79,7 @@ class _CadastroState extends State<Cadastro> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Cadastrar",
+                          _nameButtonCadastrar,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -87,7 +89,7 @@ class _CadastroState extends State<Cadastro> {
                       ],
                     ),
                     onPressed: () {
-                      if(_CadastroKey.currentState.validate()){
+                      if (_cadastroKey.currentState.validate()) {
                         _cadastrarUsuario(context);
                       }
                     },

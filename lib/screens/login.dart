@@ -11,11 +11,15 @@ class Login extends StatelessWidget {
 
   final UsuarioDAO _dao = UsuarioDAO();
 
+  static const _titleAppBar = "Desafio ITAÚ";
+  static const _nameButtonLogin = "Login";
+  static const _nameButtonCadastro = "Cadastre-se";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Desafio ITAÚ"),
+        title: Text(_titleAppBar),
       ),
       body: Container(
         padding: EdgeInsets.only(
@@ -25,15 +29,11 @@ class Login extends StatelessWidget {
         ),
         child: ListView(
           children: [
-            /*************** LOGO ******************/
             Container(
               height: 150,
               padding: EdgeInsets.all(0.0),
               child: Image.asset("lib/imgs/logo.png"),
             ),
-            /*******************.*******************/
-
-            /********* CAMPOS DE INTERACAO COM USUARIO ******************/
             EditorEmail(
               controlador: _controladorUsuario,
               icone: Icons.email,
@@ -46,11 +46,9 @@ class Login extends StatelessWidget {
               rotulo: 'Senha',
               dica: 'Digite sua senha',
             ),
-            /****************************.*******************************/
             SizedBox(
               height: 40,
             ),
-            /***************** Botao de Login  ************************/
             Container(
               height: 60,
               alignment: Alignment.centerLeft,
@@ -74,7 +72,7 @@ class Login extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Login",
+                          _nameButtonLogin,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -88,75 +86,68 @@ class Login extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {
-                      final String email = _controladorUsuario.text;
-                      final String password = _controladorSenha.text;
-
-                      if (email.isEmpty || password.isEmpty) {
-                        _AlertError(context);
-                      } else {
-                        _dao.findAll().then((usuarios) {
-                          bool encontrado = false;
-
-                          List<Usuario> lista = usuarios;
-                          for (Usuario usuario in lista) {
-                            if (usuario.email == email &&
-                                usuario.password == password) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) {
-                                  return Principal(
-                                    idUsuario: usuario.id,
-                                    emailUsuario: usuario.email,
-                                    nomeUsuario: usuario.name,
-                                  );
-                                }),
-                              );
-                              _controladorUsuario.clear();
-                              _controladorSenha.clear();
-                              encontrado = true;
-                            }
-                          }
-                          if (encontrado == false) {
-                            _AlertError(context);
-                          }
-                        });
-                      }
+                    onPressed: () async {
+                      await _autenticandoLogin(context);
                     }),
               ),
             ),
-            /***************************.*****************************/
-
-            /****************** Botao de Cadastro ********************/
             Container(
               child: FlatButton(
                 child: Text(
-                  'Cadastre-se',
+                  _nameButtonCadastro,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 17,
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(
+                  Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => Cadastro()),
-                  )
-                      .then((id) {
-                    _dao
-                        .findAll()
-                        .then((usuarios) => debugPrint(usuarios.toString()));
-                  });
+                  );
                 },
               ),
             ),
-            /**************************.*****************************/
           ],
         ),
       ),
     );
   }
 
-  void _AlertError(BuildContext context) {
+  Future _autenticandoLogin(BuildContext context) async {
+    final String email = _controladorUsuario.text;
+    final String password = _controladorSenha.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      _alertError(context);
+    } else {
+      final List<Usuario> usuarios = await _dao.findAll();
+      bool encontrado = false;
+
+      List<Usuario> lista = usuarios;
+      for (Usuario usuario in lista) {
+        if (usuario.email == email &&
+            usuario.password == password) {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return Principal(
+                idUsuario: usuario.id,
+                emailUsuario: usuario.email,
+                nomeUsuario: usuario.name,
+              );
+            }),
+          );
+          _controladorUsuario.clear();
+          _controladorSenha.clear();
+          encontrado = true;
+        }
+      }
+      if (encontrado == false) {
+        _alertError(context);
+      }
+    }
+  }
+
+  void _alertError(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {

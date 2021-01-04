@@ -114,7 +114,7 @@ class EditorNome extends StatelessWidget {
         hintText: dica,
       ),
       validator: (value){
-        if(value.isEmpty) return "Informe um nome";
+        if(value.isEmpty) return "Informe um nome.";
         return null;
       },
       keyboardType: TextInputType.name,
