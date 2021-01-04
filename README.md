@@ -36,4 +36,4 @@ No método <b>validarSenha</b> a primeira validação pega senha digitada é con
 
 ##### Pré-visualização do Projeto:
 
-<img src="/preview-project/preview-project.gif" width="500" height="1000" />
+<img src="/preview-project/preview-project.gif" width="330" height="650" />
